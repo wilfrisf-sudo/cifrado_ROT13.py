@@ -56,6 +56,9 @@ El cifrado César reemplaza cada letra del alfabeto por otra que se encuentra un
 
 Como ROT13 desplaza exactamente la mitad del alfabeto (26 letras / 2 = 13), aplicar la función dos veces sobre el mismo texto devuelve el mensaje original. Por eso `cifrar_texto` y `descifrar_texto` son intercambiables cuando se usa el desplazamiento por defecto.
 
+ejemplo
+<img width="352" height="191" alt="image" src="https://github.com/user-attachments/assets/0a584b81-6f7f-4167-be86-44994ee4246a" />
+
 ## 🔮 Posibles mejoras futuras
 
 - Soporte para acentos y la letra "ñ".
