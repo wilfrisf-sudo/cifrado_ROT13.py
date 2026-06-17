@@ -1,22 +1,41 @@
-texto = input("Ingrese texto: ").lower()
+ALFABETO = "abcdefghijklmnopqrstuvwxyz"
+DESPLAZAMIENTO_POR_DEFECTO = 13
 
-alfabeto = "abcdefghijklmnopqrstuvwxyz"
-resultado = ""
 
-for letra in texto:
+def cifrar_letra(letra: str, desplazamiento: int = DESPLAZAMIENTO_POR_DEFECTO) -> str:
+    """Cifra una sola letra usando el desplazamiento dado.
 
-    if letra in alfabeto:
+    Conserva si la letra era mayúscula o minúscula, y devuelve sin
+    cambios cualquier carácter que no sea una letra del alfabeto.
+    """
+    es_mayuscula = letra.isupper()
+    letra_min = letra.lower()
 
-        posicion = alfabeto.index(letra)
+    if letra_min not in ALFABETO:
+        return letra
 
-        nueva_posicion = posicion + 13
+    posicion = ALFABETO.index(letra_min)
+    nueva_posicion = (posicion + desplazamiento) % len(ALFABETO)
+    letra_cifrada = ALFABETO[nueva_posicion]
 
-        if nueva_posicion >= 26:
-            nueva_posicion = nueva_posicion - 26
+    return letra_cifrada.upper() if es_mayuscula else letra_cifrada
 
-        resultado += alfabeto[nueva_posicion]
 
-    else:
-        resultado += letra
+def cifrar_texto(texto: str, desplazamiento: int = DESPLAZAMIENTO_POR_DEFECTO) -> str:
+    """Cifra un texto completo, letra por letra."""
+    return "".join(cifrar_letra(c, desplazamiento) for c in texto)
 
-print("Resultado:", resultado)
+
+def descifrar_texto(texto: str, desplazamiento: int = DESPLAZAMIENTO_POR_DEFECTO) -> str:
+    """Descifra un texto que fue cifrado con el mismo desplazamiento."""
+    return cifrar_texto(texto, -desplazamiento)
+
+
+def main():
+    texto = input("Ingrese texto: ")
+    resultado = cifrar_texto(texto)
+    print("Resultado:", resultado)
+
+
+if __name__ == "__main__":
+    main()
